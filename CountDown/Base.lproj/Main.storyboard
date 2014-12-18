@@ -20,14 +20,36 @@
                                 <rect key="frame" x="-10" y="0.0" width="600" height="600"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="wLf-mE-Fsc">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="EventCell" id="wLf-mE-Fsc" customClass="EventCell">
                                         <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="wLf-mE-Fsc" id="AwT-h2-5FZ">
                                             <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Christmas Travel" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xhg-tK-1Tu">
+                                                    <rect key="frame" x="33" y="13" width="226" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="7 Days Left" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Iu1-GJ-qLE">
+                                                    <rect key="frame" x="280" y="13" width="157" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="eventDayLeft" destination="Iu1-GJ-qLE" id="pez-pW-ZGg"/>
+                                            <outlet property="eventTitle" destination="Xhg-tK-1Tu" id="i8d-AI-tmt"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="vXZ-lx-hvc" id="4w5-Xv-4VX"/>
+                                    <outlet property="delegate" destination="vXZ-lx-hvc" id="qBb-9j-vtF"/>
+                                </connections>
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
@@ -40,17 +62,18 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <segue destination="b4l-hd-g7h" kind="push" id="dbE-dP-cfj"/>
+                        <outlet property="tableView" destination="2wL-1g-J4N" id="dVv-iY-lMs"/>
+                        <segue destination="b4l-hd-g7h" kind="push" identifier="PUSH_DETAIL" id="dbE-dP-cfj"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="674" y="388"/>
+            <point key="canvasLocation" x="674" y="384"/>
         </scene>
-        <!--Table View Controller-->
+        <!--Event Detail View Controller-->
         <scene sceneID="nHI-SP-ayM">
             <objects>
-                <tableViewController id="b4l-hd-g7h" sceneMemberID="viewController">
+                <tableViewController id="b4l-hd-g7h" customClass="EventDetailViewController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="fw2-mx-qpz">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -74,10 +97,10 @@
             </objects>
             <point key="canvasLocation" x="1389" y="1128"/>
         </scene>
-        <!--Table View Controller-->
+        <!--Add Event View Controller Table View Controller-->
         <scene sceneID="QyS-43-zrR">
             <objects>
-                <tableViewController id="5Hd-am-z1Y" sceneMemberID="viewController">
+                <tableViewController id="5Hd-am-z1Y" customClass="AddEventViewControllerTableViewController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="Tv9-8s-vh8">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -111,7 +134,18 @@
                             <outlet property="delegate" destination="5Hd-am-z1Y" id="NlH-nh-4Vb"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="zVB-qr-nf9"/>
+                    <navigationItem key="navigationItem" id="zVB-qr-nf9">
+                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="J56-kf-vEm">
+                            <connections>
+                                <action selector="cancelAction:" destination="5Hd-am-z1Y" id="gwx-iJ-EWQ"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="M7r-Wm-HMw"/>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="cancel" destination="J56-kf-vEm" id="JpT-d5-9Fi"/>
+                        <outlet property="save" destination="M7r-Wm-HMw" id="ykq-y7-Lb4"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TRZ-Az-1hG" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
