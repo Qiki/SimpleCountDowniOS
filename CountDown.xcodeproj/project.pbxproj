@@ -14,6 +14,9 @@
 		27F3E59D1A4136C700D384A5 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 27F3E59C1A4136C700D384A5 /* Images.xcassets */; };
 		27F3E5A01A4136C700D384A5 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 27F3E59E1A4136C700D384A5 /* LaunchScreen.xib */; };
 		27F3E5AC1A4136C700D384A5 /* CountDownTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 27F3E5AB1A4136C700D384A5 /* CountDownTests.m */; };
+		27F740E31A42A3E800584315 /* AddEventViewControllerTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 27F740E21A42A3E800584315 /* AddEventViewControllerTableViewController.m */; };
+		27F740E61A42A45600584315 /* EventDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 27F740E51A42A45600584315 /* EventDetailViewController.m */; };
+		27F740EA1A42A62500584315 /* EventCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 27F740E91A42A62500584315 /* EventCell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,6 +43,12 @@
 		27F3E5A51A4136C700D384A5 /* CountDownTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CountDownTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		27F3E5AA1A4136C700D384A5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		27F3E5AB1A4136C700D384A5 /* CountDownTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CountDownTests.m; sourceTree = "<group>"; };
+		27F740E11A42A3E800584315 /* AddEventViewControllerTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddEventViewControllerTableViewController.h; sourceTree = "<group>"; };
+		27F740E21A42A3E800584315 /* AddEventViewControllerTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddEventViewControllerTableViewController.m; sourceTree = "<group>"; };
+		27F740E41A42A45600584315 /* EventDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EventDetailViewController.h; sourceTree = "<group>"; };
+		27F740E51A42A45600584315 /* EventDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EventDetailViewController.m; sourceTree = "<group>"; };
+		27F740E81A42A62500584315 /* EventCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EventCell.h; path = "Table Cell/EventCell.h"; sourceTree = "<group>"; };
+		27F740E91A42A62500584315 /* EventCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EventCell.m; path = "Table Cell/EventCell.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,10 +90,15 @@
 		27F3E58E1A4136C700D384A5 /* CountDown */ = {
 			isa = PBXGroup;
 			children = (
+				27F740E71A42A5EA00584315 /* Table Cell */,
 				27F3E5931A4136C700D384A5 /* AppDelegate.h */,
 				27F3E5941A4136C700D384A5 /* AppDelegate.m */,
 				27F3E5961A4136C700D384A5 /* ViewController.h */,
 				27F3E5971A4136C700D384A5 /* ViewController.m */,
+				27F740E41A42A45600584315 /* EventDetailViewController.h */,
+				27F740E51A42A45600584315 /* EventDetailViewController.m */,
+				27F740E11A42A3E800584315 /* AddEventViewControllerTableViewController.h */,
+				27F740E21A42A3E800584315 /* AddEventViewControllerTableViewController.m */,
 				27F3E5991A4136C700D384A5 /* Main.storyboard */,
 				27F3E59C1A4136C700D384A5 /* Images.xcassets */,
 				27F3E59E1A4136C700D384A5 /* LaunchScreen.xib */,
@@ -117,6 +131,15 @@
 				27F3E5AA1A4136C700D384A5 /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		27F740E71A42A5EA00584315 /* Table Cell */ = {
+			isa = PBXGroup;
+			children = (
+				27F740E81A42A62500584315 /* EventCell.h */,
+				27F740E91A42A62500584315 /* EventCell.m */,
+			);
+			name = "Table Cell";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -220,8 +243,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				27F3E5981A4136C700D384A5 /* ViewController.m in Sources */,
+				27F740E61A42A45600584315 /* EventDetailViewController.m in Sources */,
 				27F3E5951A4136C700D384A5 /* AppDelegate.m in Sources */,
 				27F3E5921A4136C700D384A5 /* main.m in Sources */,
+				27F740EA1A42A62500584315 /* EventCell.m in Sources */,
+				27F740E31A42A3E800584315 /* AddEventViewControllerTableViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -412,6 +438,7 @@
 				27F3E5B11A4136C700D384A5 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		27F3E5B21A4136C700D384A5 /* Build configuration list for PBXNativeTarget "CountDownTests" */ = {
 			isa = XCConfigurationList;
@@ -420,6 +447,7 @@
 				27F3E5B41A4136C700D384A5 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
