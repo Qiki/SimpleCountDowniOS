@@ -34,17 +34,30 @@
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
 #warning Potentially incomplete method implementation.
     // Return the number of sections.
-    return 0;
+    return 3;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
 #warning Incomplete method implementation.
     // Return the number of rows in the section.
-    return 0;
+    return 1;
 }
 
 - (IBAction)cancelAction:(id)sender {
     [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (IBAction)saveAction:(id)sender {
+    [self saveEvent];
+}
+
+- (void)saveEvent {
+    EventDetail *event = [[EventDetail alloc] init];
+    event.title = self.eventTitle.text ? : @"";
+    event.eventDescription = self.eventDescription.text ? : @"";
+    event.eventDate = [self.datePicker date];
+    
+    [self.delegate saveEvent:event];
 }
 
 @end

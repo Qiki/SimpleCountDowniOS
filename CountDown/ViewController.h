@@ -8,7 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
+#import "AddEventViewControllerTableViewController.h"
+
+@interface ViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, SaveEvent>
 
 @property (nonatomic, weak) IBOutlet UITableView *tableView;
 

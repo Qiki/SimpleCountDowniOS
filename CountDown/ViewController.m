@@ -10,6 +10,8 @@
 
 #import "EventCell.h"
 
+static NSMutableArray *events;
+
 @interface ViewController ()
 
 @end
@@ -31,7 +33,7 @@
 
 #pragma mark - UITableWWView Delegate and DataSource methods
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 1;
+    return events.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -43,6 +45,20 @@
         cell = [[EventCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
     }
     
+    EventDetail *event = events[indexPath.row];
+    
+    cell.eventTitle.text = event.title ? : @"";
+    NSCalendar *gregorianCalendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
+    NSDateComponents *components = [gregorianCalendar components:NSCalendarUnitDay
+                                                        fromDate:[NSDate date]
+                                                          toDate:event.eventDate
+                                                         options:0];
+    if ([components day] > 1) {
+       cell.eventDayLeft.text = [NSString stringWithFormat:@"%ld Days Left", (long)[components day]];
+    } else {
+        cell.eventDayLeft.text = [NSString stringWithFormat:@"%ld Day Left", (long)[components day]];
+    }
+    
     return cell;
 }
 
@@ -50,5 +66,24 @@
     [self performSegueWithIdentifier:@"PUSH_DETAIL" sender:nil];
 }
 
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if ([[segue identifier] isEqualToString:@"PUSH_ADD"]) {
+        UINavigationController *destinationViewController = (UINavigationController *)segue.destinationViewController;
+        AddEventViewControllerTableViewController *viewController = (AddEventViewControllerTableViewController *)destinationViewController.viewControllers.firstObject;
+        viewController.delegate = self;
+    }
+}
+
+- (void)saveEvent:(EventDetail *)eventList {
+    [self.tableView reloadData];
+    
+    if (events == nil) {
+        events = [[NSMutableArray alloc] init];
+    }
+    
+    [events addObject:eventList];
+    
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
 
 @end

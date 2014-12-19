@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		274FD6FC1A43E0D400420CEB /* EventDetail.m in Sources */ = {isa = PBXBuildFile; fileRef = 274FD6FB1A43E0D400420CEB /* EventDetail.m */; };
 		27F3E5921A4136C700D384A5 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 27F3E5911A4136C700D384A5 /* main.m */; };
 		27F3E5951A4136C700D384A5 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 27F3E5941A4136C700D384A5 /* AppDelegate.m */; };
 		27F3E5981A4136C700D384A5 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 27F3E5971A4136C700D384A5 /* ViewController.m */; };
@@ -30,6 +31,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		274FD6FA1A43E0D400420CEB /* EventDetail.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EventDetail.h; path = Model/EventDetail.h; sourceTree = "<group>"; };
+		274FD6FB1A43E0D400420CEB /* EventDetail.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EventDetail.m; path = Model/EventDetail.m; sourceTree = "<group>"; };
 		27F3E58C1A4136C700D384A5 /* CountDown.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CountDown.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		27F3E5901A4136C700D384A5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		27F3E5911A4136C700D384A5 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -69,6 +72,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		274FD6F91A43E0AC00420CEB /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				274FD6FA1A43E0D400420CEB /* EventDetail.h */,
+				274FD6FB1A43E0D400420CEB /* EventDetail.m */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
 		27F3E5831A4136C700D384A5 = {
 			isa = PBXGroup;
 			children = (
@@ -90,6 +102,7 @@
 		27F3E58E1A4136C700D384A5 /* CountDown */ = {
 			isa = PBXGroup;
 			children = (
+				274FD6F91A43E0AC00420CEB /* Model */,
 				27F740E71A42A5EA00584315 /* Table Cell */,
 				27F3E5931A4136C700D384A5 /* AppDelegate.h */,
 				27F3E5941A4136C700D384A5 /* AppDelegate.m */,
@@ -243,6 +256,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				27F3E5981A4136C700D384A5 /* ViewController.m in Sources */,
+				274FD6FC1A43E0D400420CEB /* EventDetail.m in Sources */,
 				27F740E61A42A45600584315 /* EventDetailViewController.m in Sources */,
 				27F3E5951A4136C700D384A5 /* AppDelegate.m in Sources */,
 				27F3E5921A4136C700D384A5 /* main.m in Sources */,

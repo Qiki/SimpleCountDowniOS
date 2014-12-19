@@ -8,9 +8,25 @@
 
 #import <UIKit/UIKit.h>
 
+#import "EventDetail.h"
+
+@protocol SaveEvent
+
+- (void)saveEvent:(EventDetail *)eventList;
+
+@end
+
 @interface AddEventViewControllerTableViewController : UITableViewController
 
+//Nav bar button UI
 @property (nonatomic, weak) IBOutlet UIBarButtonItem *cancel;
 @property (nonatomic, weak) IBOutlet UIBarButtonItem *save;
+
+//Event detail UI
+@property (nonatomic, weak) IBOutlet UITextField *eventTitle;
+@property (nonatomic, weak) IBOutlet UITextField *eventDescription;
+@property (nonatomic, weak) IBOutlet UIDatePicker *datePicker;
+
+@property (nonatomic, assign) id <SaveEvent> delegate;
 
 @end
