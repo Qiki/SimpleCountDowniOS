@@ -59,7 +59,6 @@ static NSMutableArray *events;
         cell.eventDayLeft.text = [NSString stringWithFormat:@"%ld Day Left", (long)[components day]];
     }
     
-    
     return cell;
 }
 
