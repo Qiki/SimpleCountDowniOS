@@ -73,7 +73,7 @@ static NSMutableArray *events;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-       EventDetail* event = (EventDetail*)[NSKeyedUnarchiver unarchiveObjectWithData: self.eventLists[indexPath.row]];
+    EventDetail* event = (EventDetail*)[NSKeyedUnarchiver unarchiveObjectWithData: self.eventLists[indexPath.row]];
     [self performSegueWithIdentifier:@"PUSH_DETAIL" sender:@{@"eventDetail" : event, @"index" : [NSNumber numberWithInteger:indexPath.row]}];
 }
 
