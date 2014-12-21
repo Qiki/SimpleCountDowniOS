@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface EventDetail : NSObject
+@interface EventDetail : NSObject <NSCoding>
 
 @property (nonatomic, copy) NSString *eventDescription;
 @property (nonatomic, copy) NSString *title;

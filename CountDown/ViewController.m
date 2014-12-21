@@ -14,6 +14,8 @@ static NSMutableArray *events;
 
 @interface ViewController ()
 
+@property (nonatomic, copy) NSArray *eventLists;
+
 @end
 
 @implementation ViewController
@@ -21,6 +23,7 @@ static NSMutableArray *events;
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
+    [self fetchDataFromUserDefault];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -28,12 +31,15 @@ static NSMutableArray *events;
     // Dispose of any resources that can be recreated.
 }
 
-
-
+- (void)fetchDataFromUserDefault {
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    self.eventLists = [NSArray array];
+    self.eventLists = [userDefaults objectForKey:@"events"];
+}
 
 #pragma mark - UITableWWView Delegate and DataSource methods
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return events.count;
+    return self.eventLists.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -45,7 +51,7 @@ static NSMutableArray *events;
         cell = [[EventCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
     }
     
-    EventDetail *event = events[indexPath.row];
+    EventDetail* event = (EventDetail*)[NSKeyedUnarchiver unarchiveObjectWithData: self.eventLists[indexPath.row]];
     
     cell.eventTitle.text = event.title ? : @"";
     NSCalendar *gregorianCalendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
@@ -75,15 +81,27 @@ static NSMutableArray *events;
 }
 
 - (void)saveEvent:(EventDetail *)eventList {
+    [self saveEventToUserDefault:eventList];
+    [self fetchDataFromUserDefault];
+    
     [self.tableView reloadData];
     
-    if (events == nil) {
-        events = [[NSMutableArray alloc] init];
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (void)saveEventToUserDefault:(EventDetail *)event {
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    NSMutableArray *events = [NSMutableArray array];
+    
+    if ([userDefaults objectForKey:@"events"] != nil && [[userDefaults objectForKey:@"events"] count] > 0) {
+        events = [[userDefaults objectForKey:@"events"] mutableCopy];
     }
     
-    [events addObject:eventList];
+    NSData * encodedData = [NSKeyedArchiver archivedDataWithRootObject:event];
     
-    [self dismissViewControllerAnimated:YES completion:nil];
+    [events addObject:encodedData];
+    [userDefaults setObject:[events copy] forKey:@"events"];
+    [userDefaults synchronize];
 }
 
 @end
