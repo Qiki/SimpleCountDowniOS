@@ -77,6 +77,23 @@ static NSMutableArray *events;
     [self performSegueWithIdentifier:@"PUSH_DETAIL" sender:@{@"eventDetail" : event, @"index" : [NSNumber numberWithInteger:indexPath.row]}];
 }
 
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (editingStyle == UITableViewCellEditingStyleDelete) {
+        [self removeEventFromUserDefault:indexPath];
+    }
+}
+
+- (void)removeEventFromUserDefault:(NSIndexPath *)indexPath {
+    NSMutableArray *events = [self.eventLists mutableCopy];
+    [events removeObjectAtIndex:indexPath.row];
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    [userDefaults setObject:[events copy] forKey:@"events"];
+    [userDefaults synchronize];
+    
+    [self fetchDataFromUserDefault];
+    [self.tableView reloadData];
+}
+
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([[segue identifier] isEqualToString:@"PUSH_ADD"]) {
         UINavigationController *destinationViewController = (UINavigationController *)segue.destinationViewController;
