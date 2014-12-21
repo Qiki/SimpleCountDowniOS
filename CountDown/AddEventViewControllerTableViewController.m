@@ -10,6 +10,8 @@
 
 @interface AddEventViewControllerTableViewController ()
 
+@property (nonatomic, copy) NSArray *eventLists;
+
 @end
 
 @implementation AddEventViewControllerTableViewController
@@ -17,11 +19,10 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
-    
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    if (self.isEdit) {
+        [self fetchDataFromUserDefault];
+        [self editEventInfo];
+    }
 }
 
 - (void)didReceiveMemoryWarning {
@@ -29,16 +30,30 @@
     // Dispose of any resources that can be recreated.
 }
 
+
+- (void)fetchDataFromUserDefault {
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    self.eventLists = [NSArray array];
+    self.eventLists = [userDefaults objectForKey:@"events"];
+}
+
+- (void)editEventInfo {
+    EventDetail* event = (EventDetail*)[NSKeyedUnarchiver unarchiveObjectWithData: self.eventLists[self.indexValue]];
+    
+    self.eventTitle.text = event.title ? : @"";
+    self.eventDescription.text = event.eventDescription ? : @"";
+    self.datePicker.date  = event.eventDate;
+}
+
+
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-#warning Potentially incomplete method implementation.
     // Return the number of sections.
     return 3;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-#warning Incomplete method implementation.
     // Return the number of rows in the section.
     return 1;
 }
@@ -48,16 +63,28 @@
 }
 
 - (IBAction)saveAction:(id)sender {
-    [self saveEvent];
+    if (!self.isEdit) {
+        [self saveEvent];
+    } else {
+        [self editEvent];
+    }
 }
 
 - (void)saveEvent {
+    [self.delegate saveEvent:[self getEventInfo]];
+}
+
+- (EventDetail *)getEventInfo {
     EventDetail *event = [[EventDetail alloc] init];
     event.title = self.eventTitle.text ? : @"";
     event.eventDescription = self.eventDescription.text ? : @"";
     event.eventDate = [self.datePicker date];
     
-    [self.delegate saveEvent:event];
+    return event;
+}
+
+- (void)editEvent {
+    [self.delegate editEvent:[self getEventInfo] withIndex:self.indexValue];
 }
 
 @end

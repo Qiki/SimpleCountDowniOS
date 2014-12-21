@@ -12,7 +12,9 @@
 
 @protocol SaveEvent
 
+@optional
 - (void)saveEvent:(EventDetail *)eventList;
+- (void)editEvent:(EventDetail *)eventList withIndex:(NSInteger)index;
 
 @end
 
@@ -28,5 +30,7 @@
 @property (nonatomic, weak) IBOutlet UIDatePicker *datePicker;
 
 @property (nonatomic, assign) id <SaveEvent> delegate;
+@property (nonatomic) BOOL isEdit;
+@property (nonatomic) NSInteger indexValue;
 
 @end

@@ -9,6 +9,7 @@
 #import "ViewController.h"
 
 #import "EventCell.h"
+#import "EventDetailViewController.h"
 
 static NSMutableArray *events;
 
@@ -36,6 +37,9 @@ static NSMutableArray *events;
     self.eventLists = [NSArray array];
     self.eventLists = [userDefaults objectForKey:@"events"];
 }
+
+
+
 
 #pragma mark - UITableWWView Delegate and DataSource methods
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -69,7 +73,8 @@ static NSMutableArray *events;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    [self performSegueWithIdentifier:@"PUSH_DETAIL" sender:nil];
+       EventDetail* event = (EventDetail*)[NSKeyedUnarchiver unarchiveObjectWithData: self.eventLists[indexPath.row]];
+    [self performSegueWithIdentifier:@"PUSH_DETAIL" sender:@{@"eventDetail" : event, @"index" : [NSNumber numberWithInteger:indexPath.row]}];
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
@@ -77,6 +82,9 @@ static NSMutableArray *events;
         UINavigationController *destinationViewController = (UINavigationController *)segue.destinationViewController;
         AddEventViewControllerTableViewController *viewController = (AddEventViewControllerTableViewController *)destinationViewController.viewControllers.firstObject;
         viewController.delegate = self;
+    } else if ([[segue identifier] isEqualToString:@"PUSH_DETAIL"]) {        EventDetailViewController *viewController = (EventDetailViewController *)segue.destinationViewController;
+        viewController.eventDetail = sender[@"eventDetail"];
+        viewController.index = [sender[@"index"] integerValue];
     }
 }
 
