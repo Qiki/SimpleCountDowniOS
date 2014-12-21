@@ -8,6 +8,17 @@
 
 #import <UIKit/UIKit.h>
 
-@interface EventDetailViewController : UITableViewController
+#import "EventDetail.h"
+
+#import "AddEventViewControllerTableViewController.h"
+
+@interface EventDetailViewController : UITableViewController <SaveEvent>
+
+@property (nonatomic, weak) IBOutlet UILabel *dayLeft;
+@property (nonatomic, weak) IBOutlet UILabel *eventTitle;
+@property (nonatomic, weak) IBOutlet UILabel *eventDescription;
+
+@property (nonatomic, strong) EventDetail *eventDetail;
+@property (nonatomic) NSInteger index;
 
 @end
