@@ -63,6 +63,8 @@
 }
 
 - (IBAction)saveAction:(id)sender {
+    [self setLocationNotification];
+
     if (!self.isEdit) {
         [self saveEvent];
     } else {
@@ -80,11 +82,23 @@
     event.eventDescription = self.eventDescription.text ? : @"";
     event.eventDate = [self.datePicker date];
     
+    
     return event;
 }
 
 - (void)editEvent {
     [self.delegate editEvent:[self getEventInfo] withIndex:self.indexValue];
+}
+
+- (void)setLocationNotification {
+    UILocalNotification *localNotification = [[UILocalNotification alloc] init];
+    localNotification.fireDate = [NSDate dateWithTimeInterval:86400 sinceDate:[self.datePicker date]];
+
+    localNotification.alertBody = @"One day left before your Christmas Trip with Qi! YOU KNOW THAT GingerBear!!!!";
+    localNotification.timeZone = [NSTimeZone systemTimeZone];
+    localNotification.soundName = UILocalNotificationDefaultSoundName;
+    localNotification.applicationIconBadgeNumber = 1;
+    [[UIApplication sharedApplication] scheduleLocalNotification:localNotification];
 }
 
 @end
